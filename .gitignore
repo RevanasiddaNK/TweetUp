@@ -16,7 +16,7 @@ dist-ssr
 /backend/node_modules
 
 # Ignore .env file
-/.env
+/backend/.env
 
 
 
