@@ -7,18 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-
+node_modules
 dist
 dist-ssr
 *.local
-
-# Ignore node_modules directory
-/backend/node_modules
-
-# Ignore .env file
-/backend/.env
-
-
 
 # Editor directories and files
 .vscode/*
@@ -30,4 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-node_modules
