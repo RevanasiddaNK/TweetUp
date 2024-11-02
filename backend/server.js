@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const cloudinary = require('cloudinary').v2;
+const cors = require('cors');
 require("dotenv").config();
 
 const authRoute = require("./routes/authRoute.js");
@@ -14,6 +15,11 @@ const connectToDB = require("./db/connectMongodb.js");
 app.use(express.json()); // Parses incoming JSON requests
 app.use(express.urlencoded({ extended: true })); // Parses URL-encoded data
 app.use(cookieParser());
+
+// Use the cors middleware
+app.use(cors({
+    origin: 'http://localhost:3000' // Allow only the frontend origin
+  }));
 
 // Cloudinary configuration
 cloudinary.config({

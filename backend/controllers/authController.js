@@ -69,11 +69,12 @@ module.exports = {
     // Check if user is authenticated
     authCheck: async (req, res) => {
         try {
-            const user = await User.findById(req.user._id);
-            if (!user) {
+            const authUserdata = await User.findById(req.user._id).select("-password");
+            if (!authUserdata) {
                 return res.status(404).json({ error: "User not found" });
             }
-            return res.status(200).json({ user });
+            console.log("in backend",authUserdata)
+            return res.status(200).json(authUserdata);
         } catch (error) {
             console.log(`Error in authCheck controller: ${error.message}`);
             return res.status(500).json({ error: "Internal server error" });
@@ -118,6 +119,7 @@ module.exports = {
     logout: async (req, res) => {
         try {
             res.clearCookie("jwt", { path: "/" });
+            console.log( "Logged out successfully!" );
             return res.status(200).json({ message: "Logged out successfully!" });
         } catch (error) {
             console.log(`Error in logout controller: ${error.message}`);
