@@ -7,6 +7,7 @@ const { $in } = require('sift');
 const cloudinary = require("cloudinary").v2;
 
 module.exports = {
+
     createPost: async (req, res) => {
         try {
             let { text, image } = req.body;
@@ -84,16 +85,14 @@ module.exports = {
 
     getAllPosts: async (req, res) => {
         try {
-            const allPosts = await Post.find({})
+            const data = await Post.find({})
                 .sort({ createdAt: -1 })
                 .populate({ path: "user", select: "-password" })
                 .populate({ path: "comments.user", select: "-password" });
 
-            if (allPosts.length === 0) {
-                return res.status(200).json({ message: "No posts found" });
-            }
+           
 
-            return res.status(200).json({ allPosts });
+            return res.status(200).json({ data });
         } catch (error) {
             console.error("Error at getAllPosts controller: ", error.message);
             return res.status(500).json({ error: "Internal server error" });
@@ -207,17 +206,15 @@ module.exports = {
             }
 
             const followingUsers = user.following;
+            //console.log(followingUsers)
 
-            const feedPosts = await Post.find({ user: { $in: followingUsers } })
+            const data = await Post.find({ user: { $in: followingUsers } })
                 .sort({ createdAt: -1 })
                 .populate({ path: "user", select: "-password" })
                 .populate({ path: "comments.user", select: "-password" });
+            //console.log("Inside following posts",data )
+            return res.status(200).json({ data });
 
-            if (feedPosts.length === 0) {
-                return res.status(404).json({ message: "No posts found from users you follow." });
-            }
-
-            return res.status(200).json({ feedPosts });
         } catch (error) {
             console.log("Error at getFollowingPosts controller: ", error.message);
             return res.status(500).json({ error: "Internal server error" });

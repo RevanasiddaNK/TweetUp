@@ -21,7 +21,7 @@ const {
 router.post('/', protectRoute, createPost); 
 
 // Route to get all posts (public)
-router.get("/", getAllPosts);
+router.get("/all", getAllPosts);
 
 // Route to get posts from followed users (protected)
 router.get("/feedPosts", protectRoute, getFollowingPosts);

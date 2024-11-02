@@ -73,7 +73,7 @@ module.exports = {
             if (!authUserdata) {
                 return res.status(404).json({ error: "User not found" });
             }
-            console.log("in backend",authUserdata)
+            
             return res.status(200).json(authUserdata);
         } catch (error) {
             console.log(`Error in authCheck controller: ${error.message}`);

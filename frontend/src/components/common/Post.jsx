@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
+	
 	const [comment, setComment] = useState("");
 	const postOwner = post.user;
 	const isLiked = false;
