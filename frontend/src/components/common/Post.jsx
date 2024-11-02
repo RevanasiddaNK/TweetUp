@@ -38,11 +38,11 @@ const Post = ({ post }) => {
 				});
 				const data = await res.json();
 				if(data.error){
-					throw new Error(data.error);
+					throw new Error(data.error || "something went wrong");
 				}
 
 				if(!res.ok){
-					throw new Error(data.error);
+					throw new Error(data.error || "something went wrong");
 				}
 			} 
 			catch (error) {

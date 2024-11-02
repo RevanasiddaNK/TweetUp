@@ -10,6 +10,7 @@ module.exports = {
 
     createPost: async (req, res) => {
         try {
+            console.log("Creating post controller")
             let { text, image } = req.body;
             let userId = req.user._id;
 
@@ -61,7 +62,7 @@ module.exports = {
         try {
             const { postId } = req.params;
             const post = await Post.findById(postId).populate('user', '-password');
-            console.log("Deleting post controller")
+            // console.log("Deleting post controller")
             if (!post) {
                 return res.status(404).json({ error: "Post not found" });
             }
