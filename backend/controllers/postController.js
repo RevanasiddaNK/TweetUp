@@ -61,7 +61,7 @@ module.exports = {
         try {
             const { postId } = req.params;
             const post = await Post.findById(postId).populate('user', '-password');
-
+            console.log("Deleting post controller")
             if (!post) {
                 return res.status(404).json({ error: "Post not found" });
             }
