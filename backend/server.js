@@ -3,7 +3,8 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const cloudinary = require('cloudinary').v2;
 const cors = require('cors');
-require("dotenv").config();
+const path = require('path');
+require('dotenv').config();
 
 const authRoute = require("./routes/authRoute.js");
 const userRoute = require("./routes/userRoute.js");
@@ -39,9 +40,21 @@ app.use("/api/user", userRoute);
 app.use("/api/post", postRoute);
 app.use("/api/notification", notificationRoute);
 
-// Start server
 const port = process.env.PORT || 8080;
+
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+	});
+}
+
+// Start server
+
+
 app.listen(port, () => {
     console.log(`Server is listening at port ${port}`);
     connectToDB();
 });
+
