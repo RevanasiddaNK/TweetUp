@@ -10,7 +10,7 @@ module.exports = {
 
     createPost: async (req, res) => {
         try {
-            console.log("Creating post controller")
+            //console.log("createPost controller")
             let { text, image } = req.body;
             let userId = req.user._id;
 

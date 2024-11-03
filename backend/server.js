@@ -12,7 +12,7 @@ const notificationRoute = require("./routes/notificationRoute.js");
 const connectToDB = require("./db/connectMongodb.js");
 
 // Middleware
-app.use(express.json()); // Parses incoming JSON requests
+app.use(express.json({limit:"10mb"})); // Parses incoming JSON requests
 app.use(express.urlencoded({ extended: true })); // Parses URL-encoded data
 app.use(cookieParser());
 
