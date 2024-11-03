@@ -27,10 +27,10 @@ const Posts = ({feedType}) => {
 
 			const res = await fetch(POST_ENDPOINT);
 			const {data} = await res.json();
-			console.log("data", data);
+			//console.log("data", data);
 	  
 			if (data.error) {
-			console.log("Data Error", data.error);
+			//console.log("Data Error", data.error);
 			  throw new Error(data.error);
 			}
 	  
@@ -38,7 +38,7 @@ const Posts = ({feedType}) => {
 			  throw new Error("Something went wrong in fetching posts");
 			}
 	  
-			console.log("All the posts", data);
+			//console.log("All the posts", data);
 			return data;
 		  } 
 		  catch (error) {

@@ -79,10 +79,11 @@ module.exports = {
 
             usersToFollow = usersToFollow.filter(eachUser => !user.following.includes(eachUser._id));
 
-            const suggestedUsers = usersToFollow.slice(0, 5);
-            suggestedUsers.forEach(user => { user.password = null; });
+            const data = usersToFollow.slice(0, 5);
+            data.forEach(user => { user.password = null; });
 
-            return res.status(200).json(suggestedUsers);
+            return res.status(200).json({data});
+            
         } catch (error) {
             console.error("Error getting suggested users:", error.message);
             return res.status(500).json({ error: "Internal Server Error" });

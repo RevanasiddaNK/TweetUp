@@ -11,8 +11,13 @@ const postRoute = require("./routes/postRoute.js");
 const notificationRoute = require("./routes/notificationRoute.js");
 const connectToDB = require("./db/connectMongodb.js");
 
-// Middleware
-app.use(express.json({limit:"10mb"})); // Parses incoming JSON requests
+// Middlewares
+
+// Middleware to parse incoming JSON requests with a maximum payload size of 10 MB.
+// This is useful for handling JSON request bodies, allowing the server to accept
+// and process JSON data sent in HTTP requests. Setting a size limit helps prevent
+// performance issues or potential server overload from excessively large payloads.
+app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true })); // Parses URL-encoded data
 app.use(cookieParser());
 
