@@ -43,7 +43,7 @@ const CreatePost = () => {
 				
 			} catch (error) {
 				//console.log("errrrrrr",error.message);
-				throw new Error(error);
+				throw new Error(error.message);
 			}
 		},
 		onSuccess : () => {

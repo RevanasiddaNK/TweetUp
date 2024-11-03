@@ -33,7 +33,7 @@ const Sidebar = () => {
 					throw new Error(data.error || "Something went wrong");
 				}
 			} catch (error) {
-				throw new Error(error);
+				throw new Error(error.message);
 			}
 		},
 
