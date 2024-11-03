@@ -12,12 +12,12 @@ dist
 dist-ssr
 *.local
 
+
 # Ignore node_modules directory
 /backend/node_modules
 
 # Ignore .env file
 /backend/.env
-
 
 
 # Editor directories and files

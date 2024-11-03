@@ -103,7 +103,8 @@ module.exports = {
     likeUnlikePost: async (req, res) => {
         try {
             const userId = req.user._id;
-            const { postId } = req.params;
+         
+            let  {postId}  = req.params;
 
             const user = await User.findById(userId).select("-password");
             if (!user) return res.status(404).json({ error: "User not found" });
@@ -115,7 +116,7 @@ module.exports = {
                 await Post.updateOne({ _id: post._id }, { $pull: { likes: user._id } });
                 await User.updateOne({ _id: user._id }, { $pull: { likedPosts: post._id } });
                 const updatedLikes = post.likes.filter(id => id.toString() !== user._id.toString());
-                return res.status(200).json({ message: "Post unliked", updatedLikes });
+                return res.status(200).json( {message:"You Unliked a post successfully" ,updatedLikes} );
             } else {
                 await Post.updateOne({ _id: post._id }, { $push: { likes: user._id } });
                 await User.updateOne({ _id: user._id }, { $push: { likedPosts: post._id } });
@@ -128,7 +129,8 @@ module.exports = {
                 await notification.save();
 
                 const updatedLikes = [...post.likes, user._id];
-                return res.status(200).json({ message: "Post liked", updatedLikes });
+                //console.log("UpdaTED LIKES");
+                return res.status(200).json( {message:"You liked a post successfully" ,updatedLikes} );
             }
         } catch (error) {
             console.error("Error at likeUnlikePost controller: ", error.message);
