@@ -30,8 +30,6 @@ const Post = ({ post }) => {
 
 	const formattedDate = formatPostDate(post.createdAt);
 
-	
-
 	const {mutate : handleDeletePost ,isPending: isDeleting } = useMutation({
 		mutationFn : async () => {
 			try {
@@ -148,6 +146,7 @@ const Post = ({ post }) => {
 		if (isLiking) return;
 		likePost();
 	}
+	
 /*
 	useEffect(()=>{
 		setIsLiked((prev) => !prev);

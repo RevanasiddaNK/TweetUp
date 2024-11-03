@@ -14,10 +14,6 @@ module.exports = {
                     select: " username profileImage"
                 });
     
-            // If no notifications are found, send a 404 response
-            if (!notifications.length) {
-                return res.status(404).json({ error: "No notifications found!" });
-            }
     
             // Mark all fetched notifications as read
             await Notification.updateMany({ to: userId }, { isRead: true });
