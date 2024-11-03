@@ -160,7 +160,7 @@ const Post = ({ post }) => {
 				
 				<div className='avatar'>
 					<Link to={`/profile/${postOwner.username}`} className='w-8 rounded-full overflow-hidden'>
-						<img src={postOwner.profileImg || "/avatar-placeholder.png"} />
+						<img src={postOwner.profileImage || "/avatar-placeholder.png"} />
 					</Link>
 				</div>
 
@@ -226,7 +226,7 @@ const Post = ({ post }) => {
 												<div className='avatar'>
 													<div className='w-8 rounded-full'>
 														<img
-															src={comment.user.profileImg || "/avatar-placeholder.png"}
+															src={comment.user.profileImage || "/avatar-placeholder.png"}
 														/>
 													</div>
 												</div>

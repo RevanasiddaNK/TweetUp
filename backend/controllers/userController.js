@@ -95,8 +95,14 @@ module.exports = {
             const userID = req.user._id;
             const {
                 username, email, currentPassword, newPassword,
-                fullName, profileImage, coverImage, bio, link
+                fullName, bio, link
             } = req.body;
+
+            const {profileImage, coverImage} = req.body;
+
+
+            console.log("profileImage", profileImage);
+
 
             const userDetails = await User.findById(userID);
 
