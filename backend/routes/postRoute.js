@@ -27,10 +27,10 @@ router.get("/all", getAllPosts);
 router.get("/feedPosts", protectRoute, getFollowingPosts);
 
 // Route to get liked posts by the user (protected)
-router.get('/likedPosts', protectRoute, getLikedPosts); 
+router.get('/likes/:userId', protectRoute, getLikedPosts); 
 
 // Route to get posts by the logged-in user (protected)
-router.get('/userPosts', protectRoute, getUserPosts);
+router.get('/user/:username', protectRoute, getUserPosts);
 
 // Route to get a specific post by ID (public)
 router.get('/:postId', getPost);

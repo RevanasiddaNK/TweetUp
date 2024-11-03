@@ -177,22 +177,19 @@ module.exports = {
 
     getLikedPosts: async (req, res) => {
         try {
-            const userId = req.user._id;
+            const {userId} = req.params;
+            //console.log("userId", userId);
             const user = await User.findById(userId).select("-password");
 
             if (!user) {
                 return res.status(404).json({ message: "User not found" });
             }
 
-            const likedPosts = await Post.find({ _id: { $in: user.likedPosts } })
+            const data = await Post.find({ _id: { $in: user.likedPosts } })
                 .populate({ path: "user", select: "-password" })
                 .populate({ path: "comments.user", select: "-password" });
 
-            if (likedPosts.length === 0) {
-                return res.status(404).json({ message: "No liked posts found" });
-            }
-
-            return res.status(200).json(likedPosts);
+            return res.status(200).json({data});
         } catch (error) {
             console.error("Error at getLikedPosts controller: ", error.message);
             return res.status(500).json({ error: "Internal server error" });
@@ -226,14 +223,14 @@ module.exports = {
 
     getUserPosts: async (req, res) => {
         try {
-            const userId = req.user._id;
-    
-            const user = await User.findById(userId).select("-password");
+            const username = req.params;
+            console.log(username);
+            const user = await User.findOne(username).select("-password");
             if (!user) {
                 return res.status(404).json({ error: "User not found" });
             }
-    
-            const userPosts = await Post.find({ user: userId })
+            const userId = user._id;
+            const data = await Post.find({ user: userId })
                 .sort({ createdAt: -1 })
                 .populate({
                     path: "user",
@@ -244,7 +241,7 @@ module.exports = {
                     select: "-password",
                 });
     
-            return res.status(200).json({ userPosts });
+            return res.status(200).json({data});
         } catch (error) {
             console.error("Error at getUserPosts controller: ", error.message);
             return res.status(500).json({ error: "Internal server error" });

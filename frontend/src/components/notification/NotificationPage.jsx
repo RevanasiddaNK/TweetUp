@@ -5,9 +5,11 @@ import { FaUser } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast"; 
+
 const NotificationPage = () => {
 	
 	const queryClient = useQueryClient();
+
 	const {data:notifications, isLoading} = useQuery({
 		queryKey: ["notifications"],
 		queryFn : async() => {
@@ -103,4 +105,5 @@ const NotificationPage = () => {
 		</>
 	);
 };
+
 export default NotificationPage;

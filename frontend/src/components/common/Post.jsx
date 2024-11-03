@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import LoadingSpinner from "./LoadingSpinner";
 import { formatPostDate } from "../../utils/date";
 
+
 const Post = ({ post }) => {
 	
 	const queryClient = useQueryClient();
