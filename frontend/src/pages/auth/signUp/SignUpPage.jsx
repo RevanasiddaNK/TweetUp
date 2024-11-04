@@ -24,7 +24,7 @@ const SignUpPage = () => {
 
 	const queryClient = new QueryClient();
 
-	const { mutate : signUpMutation , isError, isPending, error  } = useMutation({
+	const { mutate : signUpMutation , isError, isPending, data:signUpData, error  } = useMutation({
 
 		mutationFn : async (formData) => {
 	
@@ -38,34 +38,27 @@ const SignUpPage = () => {
 					body : JSON.stringify(formData),
 				});
 
-				
+				const data = await res.json();
 
 				if (!res.ok) {
-					const errorData = await res.json(); // Get error details from response
-					console.error('Error:', errorData.message || res.statusText);
+					console.error('Error:', data.message || res.statusText);
 					// Use toast.error to display the error message
-					toast.error(errorData.error ||  "Failed to create an account");
-					throw new Error(errorData.error ||  res.statusText);
+					toast.error(data.error ||  "Failed to create an account");
+					throw new Error(data.error ||  res.statusText);
 				  }
 				  else{
-					const data = await res.json(); // Optionally parse the JSON response if needed
+				 // Optionally parse the JSON response if needed
 					// Additional checks can be performed on the 'data' if your API returns specific fields
 					toast.success("Account created successfully");
 					console.log(data);
 				}
-
-				
-				
+				return data;
 			} catch (error) {
 				console.log("error at signUp Page UI ", error.message);
-				throw new  error(error.message);
+				throw new Error(error.message);
 			}
 
 		},
-
-		onSuccess : () => {
-			
-		}
 	});
 
 	const handleSubmit = (e) => {
@@ -135,12 +128,13 @@ const SignUpPage = () => {
 						/>
 					</label>
 					<button className='btn rounded-full btn-primary text-white'>Sign up</button>
-
+					
 					{isError && (
 						<p className='text-red-500'>
-							{error.message || "An error occurred during sign-up."} {/* Display the error message */}
+							{ error.message || "An error occurred during sign-up."} {/* Display the error message */}
 						</p>
 					)}
+	
 
 				</form>
 				<div className='flex flex-col lg:w-2/3 gap-2 mt-4'>
